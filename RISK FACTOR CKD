@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuiz Risiko CKD</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: url('https://images.unsplash.com/photo-1508746829417-e6f548d8d6c7?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #2e3d49;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 100, 80, 0.2);
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+    h1 {
+      text-align: center;
+      color: #00695c;
+    }
+    .question {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+      background: #ffffffdd;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    .question.active {
+      display: block;
+    }
+    .button {
+      background-color: #80cbc4;
+      border: none;
+      color: white;
+      padding: 12px 20px;
+      margin: 10px 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .button:hover {
+      background-color: #4db6ac;
+    }
+    #result {
+      display: none;
+      margin-top: 30px;
+      text-align: center;
+      background: #ffffffdd;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .progress {
+      height: 10px;
+      background: #b2dfdb;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .progress-bar {
+      height: 100%;
+      background: #00796b;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    .bmi-link {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    .bmi-link a {
+      color: #00796b;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Kuiz Risiko Penyakit Buah Pinggang Kronik</h1>
+  <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
+
+  <div id="quiz-container">
+    <div class="question active" data-index="0">
+      <p>1. Adakah anda mempunyai tekanan darah tinggi?</p>
+      <button class="button" onclick="answer('yes')">Ya</button>
+      <button class="button" onclick="answer('no')">Tidak</button>
+    </div>
+    <div class="question" data-index="1">
+      <p>2. Adakah anda menghidap penyakit kencing manis?</p>
+      <button class="button" onclick="answer('yes')">Ya</button>
+      <button class="button" onclick="answer('no')">Tidak</button>
+    </div>
+    <div class="question" data-index="2">
+      <p>3. Adakah anda mempunyai sejarah keluarga penyakit buah pinggang?</p>
+      <button class="button" onclick="answer('yes')">Ya</button>
+      <button class="button" onclick="answer('no')">Tidak</button>
+    </div>
+    <div class="question" data-index="3">
+      <p>4. Adakah anda berumur lebih daripada 60 tahun?</p>
+      <button class="button" onclick="answer('yes')">Ya</button>
+      <button class="button" onclick="answer('no')">Tidak</button>
+    </div>
+    <div class="question" data-index="4">
+      <p>5. Adakah anda merokok?</p>
+      <button class="button" onclick="answer('yes')">Ya</button>
+      <button class="button" onclick="answer('no')">Tidak</button>
+    </div>
+    <div class="question" data-index="5">
+      <p>6. Adakah anda mengalami berat badan berlebihan atau obesiti?</p>
+      <button class="button" onclick="answer('yes')">Ya</button>
+      <button class="button" onclick="answer('no')">Tidak</button>
+      <div class="bmi-link">
+        <a href="https://www.calculator.net/bmi-calculator.html" target="_blank">Klik di sini untuk mengira BMI anda jika anda tidak pasti.</a>
+      </div>
+    </div>
+    <div class="question" data-index="6">
+      <p>7. Adakah anda kerap mengambil ubat tahan sakit tanpa preskripsi?</p>
+      <button class="button" onclick="answer('yes')">Ya</button>
+      <button class="button" onclick="answer('no')">Tidak</button>
+    </div>
+    <div class="question" data-index="7">
+      <p>8. Adakah anda mengalami bengkak pada kaki, buku lali atau tangan?</p>
+      <button class="button" onclick="answer('yes')">Ya</button>
+      <button class="button" onclick="answer('no')">Tidak</button>
+    </div>
+    <div class="question" data-index="8">
+      <p>9. Adakah anda kerap buang air kecil pada waktu malam?</p>
+      <button class="button" onclick="answer('yes')">Ya</button>
+      <button class="button" onclick="answer('no')">Tidak</button>
+    </div>
+    <div class="question" data-index="9">
+      <p>10. Adakah anda pernah mengalami jangkitan salur kencing lebih daripada sekali?</p>
+      <button class="button" onclick="answer('yes')">Ya</button>
+      <button class="button" onclick="answer('no')">Tidak</button>
+    </div>
+  </div>
+
+  <div id="result">
+    <h2>Keputusan Risiko Anda</h2>
+    <p id="result-text"></p>
+    <button class="button" onclick="location.reload()">Cuba Semula</button>
+  </div>
+
+  <script>
+    let currentQuestion = 0;
+    let yesCount = 0;
+    const questions = document.querySelectorAll(".question");
+    const progressBar = document.getElementById("progress-bar");
+
+    function answer(choice) {
+      if (choice === "yes") yesCount++;
+
+      questions[currentQuestion].classList.remove("active");
+      currentQuestion++;
+
+      const progress = (currentQuestion / questions.length) * 100;
+      progressBar.style.width = progress + "%";
+
+      if (currentQuestion < questions.length) {
+        questions[currentQuestion].classList.add("active");
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      document.getElementById("quiz-container").style.display = "none";
+      document.getElementById("result").style.display = "block";
+
+      let message = "";
+      if (yesCount <= 2) {
+        message = "Risiko anda adalah rendah. Teruskan gaya hidup sihat!";
+      } else if (yesCount <= 5) {
+        message = "Risiko anda adalah sederhana. Sila pertimbangkan untuk berjumpa dengan penyedia penjagaan kesihatan.";
+      } else {
+        message = "Risiko anda adalah tinggi. Sila berjumpa doktor dengan segera.";
+      }
+
+      document.getElementById("result-text").innerText = message;
+    }
+  </script>
+</body>
+</html>
